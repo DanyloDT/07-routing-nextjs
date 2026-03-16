@@ -11,8 +11,6 @@ type Props = {
 };
 const NoteDetail = async ({ params }: Props) => {
   const { id } = await params;
-  // const note = await fetchNoteById(id);
-  // console.log(note);
 
   const queryClient = new QueryClient();
 

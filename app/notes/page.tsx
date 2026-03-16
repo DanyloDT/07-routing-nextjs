@@ -17,7 +17,7 @@ const Notes = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient />
+      {/* <NotesClient /> */}
     </HydrationBoundary>
   );
 };

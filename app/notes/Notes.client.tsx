@@ -14,10 +14,11 @@ import { useDebouncedCallback } from 'use-debounce';
 // import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import EmptyState from '../components/EmptyState/EmptyState';
 
-const NotesClient = () => {
+const NotesClient = ({ slug }: { slug: string[] }) => {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const tag = slug[0] === 'all' ? undefined : slug[0];
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setPage(1);
@@ -25,8 +26,8 @@ const NotesClient = () => {
   }, 500);
 
   const { data, isError, error } = useQuery({
-    queryKey: ['notes', page, search],
-    queryFn: () => fetchNotes({ page, perPage: 12, search }),
+    queryKey: ['notes', page, search, tag],
+    queryFn: () => fetchNotes({ page, perPage: 12, search, tag }),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
@@ -39,7 +40,7 @@ const NotesClient = () => {
 
   return (
     <div className={css.app}>
-      <header className={css.toolbar}>
+      <div className={css.toolbar}>
         <SearchBox onSearch={debouncedSearch} />
         {totalPages > 1 && (
           <Pagination page={page} setPage={setPage} totalPages={totalPages} />
@@ -50,7 +51,7 @@ const NotesClient = () => {
         >
           Create note +
         </button>
-      </header>
+      </div>
       {/* {isLoading && <Loader />} */}
       {/* {isError && <ErrorMessage message={error.message} />} */}
       {data && notes.length === 0 ? <EmptyState /> : <NoteList notes={notes} />}
