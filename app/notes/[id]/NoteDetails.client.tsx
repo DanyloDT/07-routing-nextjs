@@ -2,6 +2,7 @@
 
 import NoteDetailsClient from '@/app/components/NoteDetailsClient/NoteDetailsClient';
 import { fetchNoteById } from '@/app/lib/api';
+import Loading from '@/app/loading';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 
@@ -12,20 +13,22 @@ const NoteDetails = () => {
   const {
     data: note,
     isLoading,
-    error,
+    isError,
   } = useQuery({
     queryKey: ['note', id],
     queryFn: () => fetchNoteById(id as string),
   });
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError || !note) {
+    return <p>Something went wrong.</p>;
+  }
   return (
     <>
-      {isLoading && <p>Loading, please wait...</p>}
-      {error || !note ? (
-        <p>Something went wrong.</p>
-      ) : (
-        <NoteDetailsClient note={note} />
-      )}
+      <NoteDetailsClient note={note} />
     </>
   );
 };
