@@ -1,6 +1,10 @@
 import css from './loading.module.css';
 const Loading = () => {
-  return <p className={css.text}>Loading, please wait...</p>;
+  return (
+    <div className={css.backdrop}>
+      <p className={css.text}>Loading, please wait...</p>;
+    </div>
+  );
 };
 
 export default Loading;

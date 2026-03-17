@@ -74,3 +74,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.link {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #0d6efd;
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
