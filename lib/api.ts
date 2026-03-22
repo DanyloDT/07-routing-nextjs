@@ -35,7 +35,7 @@ export const createNote = async (
   return data;
 };
 
-export const fetchNoteById = async (id: string) => {
+export const fetchNoteById = async (id: string): Promise<Note> => {
   const { data } = await instance.get<Note>(`/notes/${id}`);
   return data;
 };
