@@ -5,6 +5,7 @@ import Loading from '@/app/loading';
 import { useQuery } from '@tanstack/react-query';
 import { fetchNoteById } from '@/lib/api';
 import Modal from '@/components/Modal/Modal';
+import { Note } from '@/types/note';
 
 const NotePreview = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const NotePreview = () => {
     data: note,
     isLoading,
     isError,
-  } = useQuery({
+  } = useQuery<Note>({
     queryKey: ['note', id],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
