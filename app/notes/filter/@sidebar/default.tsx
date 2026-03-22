@@ -1,4 +1,4 @@
-import SidebarNotes from '@/app/components/SidebarNotes/SidebarNotes';
+import SidebarNotes from '@/components/SidebarNotes/SidebarNotes';
 import React from 'react';
 
 const Sidebar = () => {

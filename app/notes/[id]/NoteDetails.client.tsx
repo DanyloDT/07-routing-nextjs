@@ -1,14 +1,13 @@
 'use client';
 
-import NoteDetailsClient from '@/app/components/NoteDetailsClient/NoteDetailsClient';
-import { fetchNoteById } from '@/app/lib/api';
+import NoteDetailsClient from '@/components/NoteDetailsClient/NoteDetailsClient';
+import { fetchNoteById } from '@/lib/api';
 import Loading from '@/app/loading';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 
 const NoteDetails = () => {
-  const { id } = useParams();
-  console.log(id);
+  const { id } = useParams<{ id: string }>();
 
   const {
     data: note,
@@ -16,7 +15,7 @@ const NoteDetails = () => {
     isError,
   } = useQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(id as string),
+    queryFn: () => fetchNoteById(id),
   });
 
   if (isLoading) {

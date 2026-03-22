@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import css from './NotePreview.module.css';
-import { Note } from '@/app/types/note';
+import { Note } from '@/types/note';
 
 interface NotePreviewProps {
   note: Note;

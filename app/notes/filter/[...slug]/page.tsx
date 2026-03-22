@@ -1,8 +1,5 @@
-// 'use client';
-
-import NoteList from '@/app/components/NoteList/NoteList';
-import { fetchNotes } from '@/app/lib/api';
-import NotesClient from '../../Notes.client';
+import { fetchNotes } from '@/lib/api';
+import NotesClient from './Notes.client';
 import {
   dehydrate,
   HydrationBoundary,

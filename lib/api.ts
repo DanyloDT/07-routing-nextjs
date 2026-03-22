@@ -10,8 +10,8 @@ const instance = axios.create({
 
 interface FetchNotesParams {
   page: number;
-  perPage: number;
-  search: string;
+  perPage?: number;
+  search?: string;
   tag?: string;
 }
 
@@ -24,13 +24,14 @@ export const fetchNotes = async (
   params: FetchNotesParams,
 ): Promise<FetchNoteResponse> => {
   const { data } = await instance.get<FetchNoteResponse>('/notes', { params });
-  console.log(data);
 
   return data;
 };
 
-export const createNote = (params: Pick<Note, 'title' | 'content' | 'tag'>) => {
-  const data = instance.post<Note>('/notes', params);
+export const createNote = async (
+  params: Pick<Note, 'title' | 'content' | 'tag'>,
+): Promise<Note> => {
+  const { data } = await instance.post<Note>('/notes', params);
   return data;
 };
 
@@ -39,4 +40,7 @@ export const fetchNoteById = async (id: string) => {
   return data;
 };
 
-export const deleteNote = (id: string) => instance.delete<Note>(`/notes/${id}`);
+export const deleteNote = async (id: string): Promise<Note> => {
+  const { data } = await instance.delete<Note>(`/notes/${id}`);
+  return data;
+};

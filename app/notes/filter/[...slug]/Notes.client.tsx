@@ -1,18 +1,16 @@
 'use client';
 
 import css from './Notes.module.css';
-import NoteList from '../components/NoteList/NoteList';
+import NoteList from '@/components/NoteList/NoteList';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { fetchNotes } from '../lib/api';
-import Pagination from '../components/Pagination/Pagination';
+import { fetchNotes } from '@/lib/api';
+import Pagination from '@/components/Pagination/Pagination';
 import { useState } from 'react';
-import Modal from '../components/Modal/Modal';
-import NoteForm from '../components/NoteForm/NoteForm';
-import SearchBox from '../components/SearchBox/SearchBox';
+import Modal from '@/components/Modal/Modal';
+import NoteForm from '@/components/NoteForm/NoteForm';
+import SearchBox from '@/components/SearchBox/SearchBox';
 import { useDebouncedCallback } from 'use-debounce';
-// import Loader from '../components/Loader/Loader';
-// import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
-import EmptyState from '../components/EmptyState/EmptyState';
+import EmptyState from '@/components/EmptyState/EmptyState';
 
 const NotesClient = ({ slug }: { slug: string[] }) => {
   const [page, setPage] = useState(1);
@@ -52,8 +50,7 @@ const NotesClient = ({ slug }: { slug: string[] }) => {
           Create note +
         </button>
       </div>
-      {/* {isLoading && <Loader />} */}
-      {/* {isError && <ErrorMessage message={error.message} />} */}
+
       {data && notes.length === 0 ? <EmptyState /> : <NoteList notes={notes} />}
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(!isModalOpen)}>
