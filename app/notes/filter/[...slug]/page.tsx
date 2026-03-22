@@ -13,15 +13,16 @@ type Props = {
 const NotesByCategory = async ({ params }: Props) => {
   const { slug } = await params;
   const queryClient = new QueryClient();
+  const tag = slug[0] === 'all' ? undefined : slug[0];
 
   await queryClient.prefetchQuery({
-    queryKey: ['notes', 1, ''],
-    queryFn: () => fetchNotes({ page: 1, perPage: 12, search: '' }),
+    queryKey: ['notes', 1, '', tag],
+    queryFn: () => fetchNotes({ page: 1, perPage: 12, search: '', tag }),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient slug={slug} />
+      <NotesClient tag={tag} />
     </HydrationBoundary>
   );
 };
