@@ -1,4 +1,4 @@
-import { Note } from '@/app/types/note';
+import { Note } from '@/types/note';
 import css from './NoteDetailsClient.module.css';
 
 interface NoteDetailsClientProps {
